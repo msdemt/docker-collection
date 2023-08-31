@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  slurm-master:
+    image: hekai/centos7-slurm
+    hostname: linux0
+    privileged: true
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+    - 389:389
+    - 6820:6820
+    environment:
+      role: "master"
+      TZ: Asia/Shanghai
+    volumes:
+    - .data/volumes/log:/var/log/slurm
+    - etc_munge:/etc/munge
+    - etc_slurm:/etc/slurm
+    - spool_slurm:/var/spool/slurm
+    - mysql:/var/lib/mysql
+
+  slurm-compute-1:
+    image: hekai/centos7-slurm
+    hostname: linux1
+    privileged: true
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      role: "compute"
+      TZ: Asia/Shanghai
+    volumes:
+    - .data/volumes/log:/var/log/slurm
+    - etc_munge:/etc/munge
+    - etc_slurm:/etc/slurm
+    depends_on:
+    - "slurm-master"
+
+  slurm-compute-2:
+    image: hekai/centos7-slurm
+    hostname: linux2
+    privileged: true
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      role: "compute"
+      TZ: Asia/Shanghai
+    volumes:
+    - .data/volumes/log:/var/log/slurm
+    - etc_munge:/etc/munge
+    - etc_slurm:/etc/slurm
+    depends_on:
+    - "slurm-master"
+
+volumes:
+  etc_munge:
+  etc_slurm:
+  spool_slurm:
+  mysql:
