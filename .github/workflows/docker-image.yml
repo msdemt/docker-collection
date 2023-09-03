@@ -1,4 +1,4 @@
-name: centos7-jdk8u202
+name: centos7.9-jdk8u202
 
 on:
   push:
@@ -35,4 +35,4 @@ jobs:
             linux/amd64
             linux/arm64
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/centos7-jdk8u202:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/centos7.9-jdk8u202:latest
