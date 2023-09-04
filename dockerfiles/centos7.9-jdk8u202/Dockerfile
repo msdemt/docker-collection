@@ -13,7 +13,7 @@ RUN set -ex \
     && cat jdk8u202.tar.gz* | tar -zxf - \
     && tar -zxf jdk-8u202-linux-x64.tar.gz -C /usr/local \
     && ln -s /usr/local/jdk1.8.0_202 /usr/local/jdk \
-    && echo -e '#!/bin/bash\nexport JAVA_HOME=/usr/local/jdk\nexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar\ncase ":$PATH:" in\n    *":$JAVA_HOME/bin:"*) :;; # already there\n    *) PATH="$JAVA_HOME/bin:$PATH";; # or PATH="$PATH:$new_entry"\nesac' > /etc/profile.d/jdk.sh \
+    && echo -e '#!/bin/bash\nexport JAVA_HOME=/usr/local/jdk\nexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar\ncase ":$PATH:" in\n    *":$JAVA_HOME/bin:"*) :;; \n    *) PATH="$JAVA_HOME/bin:$PATH";;\nesac' > /etc/profile.d/jdk.sh \
     && source /etc/profile \
     && rm -rf jdk8u202.tar.gz* jdk-8u202-linux-x64.tar.gz \
     && rm -rf   /var/log/* \
