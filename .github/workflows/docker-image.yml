@@ -33,5 +33,6 @@ jobs:
         file: ./dockerfiles/centos7.9-jdk8u202/Dockerfile
         platforms: |
             linux/amd64
+            linux/arm64
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/centos7.9-jdk8u202:latest
