@@ -4,11 +4,12 @@ ENV LANG zh_CN.UTF-8
 ENV LC_ALL zh_CN.UTF-8
 
 RUN set -ex \
+    # support chinese
+    && yum install -y kde-l10n-Chinese glibc-common \
     && localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 \
     && echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-RUN set -ex \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    # add jdk
     && curl -O https://msdemt.github.io/resources/jdk8u202.tar.gz0[0-7] \
     && cat jdk8u202.tar.gz* | tar -zxf - \
     && tar -zxf jdk-8u202-linux-x64.tar.gz -C /usr/local \
@@ -70,5 +71,8 @@ RUN set -ex \
                 ${JAVA_HOME}/jre/lib/ext/jfxrt.jar \
                 ${JAVA_HOME}/jre/lib/ext/jaccess.jar \
     && ln -s ${JAVA_HOME}/jre/lib/amd64/libjsig.so ${JAVA_HOME}/jre/lib/amd64/server/libjsig.so
-    
+
+ENV LANG zh_CN.UTF-8
+ENV LC_ALL zh_CN.UTF-8
+
 CMD ["/bin/bash"]
