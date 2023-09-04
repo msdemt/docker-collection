@@ -1,8 +1,5 @@
 FROM centos:7.9.2009
 
-ENV LANG zh_CN.UTF-8
-ENV LC_ALL zh_CN.UTF-8
-
 RUN set -ex \
     # support chinese
     && yum install -y kde-l10n-Chinese glibc-common \
